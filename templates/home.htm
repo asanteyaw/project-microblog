@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Microblog</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar__brand">
+      <img src="/static/logo.svg" alt="The Microblog logo" class="navbar__logo">Microblog
+    </div>
+    <!-- navigation bar -->
+    <ul class="navbar__navigation">
+      <li class="navbar__navigation-item"><a href="#" class="navbar__link">Recent</a></li>
+      <li class="navbar__navigation-item"><a href="#" class="navbar__link">Calendar</a></li>
+    </ul>
+  </header>
+  <main class="main">
+    <!-- Every section usually has a header -->
+    <section>
+      <h1>Add new entry</h1>
+      <form class="form" action="/" method="post">
+        <p class="form__input">
+          <label for="entry" class="form__label">Enter contents: </label>
+          <textarea name="content" id="entry" class="form__textarea"></textarea>
+        </p>
+        <button type="submit" class="form__submit">Add entry</button>
+      </form>
+    </section>
+    <section>
+      <h1>Recent posts</h1>
+      {% for entry in entries %}
+      <article class="entry">
+        <div>
+          <!-- The pipe(|) is used as a "filter", it applies the function on the right to the whatever's 
+           on the left before rendring. In our case we're applying the truncate function to truncate
+           30 characters of the content and used it as the title for the content. "true" means it will show
+           ellipses if the content is more than 30-->
+          <h2 class="entry__title">{{ entry[0] | truncate(30, true) }}</h2>  
+          <time class="entry__date" datetime="{{ entry[1] }}">● {{ entry[2] }}</time>
+        </div>
+        <p class="entry__content">
+          <!-- Today I couldn't do much programming, but that's OK! Can't be too awesome every day now! -->
+           {{ entry[0] }}
+        </p>
+      </article>
+      {% endfor %}
+    </section>
+  </main>
+  <footer class="footer">
+    <div class="footer__content">
+      <section class="left">
+        <a href="" class="footer__item">Made by Yaw Asante</a>
+        <a href="" class="footer__item">Check out my other projects</a>
+      </section>
+      <section class="right">
+        <div class="footer__column">
+          <a href="" class="footer__item">Recent</a>
+          <a href="" class="footer__item">Calendar</a>
+        </div>
+        <div class="footer__column">
+          <a href="" class="footer__item">About</a>
+          <a href="" class="footer__item">How this was made</a>
+        </div>
+      </section>
+    </div>
+  </footer>
+</body>
+</html>
